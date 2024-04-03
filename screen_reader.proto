@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package screenreader;
+
+// The screen reader service definition.
+service VirtualScreenReader {
+  // Moves to the next heading in the document.
+  rpc NextHeading (NavigationRequest) returns (NavigationResponse) {}
+
+  // Moves to the next link in the document.
+  rpc NextLink (NavigationRequest) returns (NavigationResponse) {}
+
+  // Moves to the next landmark region in the document.
+  rpc NextLandmark (NavigationRequest) returns (NavigationResponse) {}
+}
+
+// The navigation request message.
+// This can be expanded with additional fields as needed,
+// such as for specifying direction (forward or backward).
+message NavigationRequest {
+}
+
+// The navigation response message containing the details of the located item.
+message NavigationResponse {
+  string text = 1; // Text of the heading, link, or region
+  string ariaRole = 2; // ARIA role, if applicable
+  string status = 3; // Status of the navigation request, e.g., "success" or "not found"
+}
